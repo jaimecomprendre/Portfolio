@@ -184,27 +184,51 @@
 
 
         
-        .project-media {
+        .project-card .project-media {
             position: relative;
-            background-color: #000; /* Black background for letterboxing */
+            background-color: #000;
             aspect-ratio: 16/9;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
-        
-        .project-media img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .project-media video {
+
+        .project-card .project-media video {
             width: auto;
             height: 100%;
             max-width: 100%;
             margin: 0 auto;
             display: block;
-            object-fit: contain; /* This ensures the video maintains its aspect ratio */
+            object-fit: contain;
+        }
+
+        /* Play button overlay */
+        .project-card .project-media .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 2;
+            border: 2px solid white;
+        }
+
+        .project-card .project-media .play-button::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 20px;
+            border-color: transparent transparent transparent white;
+            margin-left: 5px;
         }
 
         .project-info {
@@ -471,14 +495,16 @@
 
     <div class="project-card">
         <div class="project-info">
-          <h3>Motion Graphics</h3>
-          <p>An engaging animation showcasing smooth transitions and dynamic visual effects.</p>
+            <h3>Motion Graphics</h3>
+            <p>An engaging animation showcasing smooth transitions and dynamic visual effects.</p>
         </div>
-        <div class="play-button"></div>
-        <video controls>
-          <source src="https://i.imgur.com/DYKrfgs.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+        <div class="project-media">
+            <div class="play-button"></div>
+            <video controls>
+                <source src="https://i.imgur.com/DYKrfgs.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
     </div>
 
     <div class="project-card">
