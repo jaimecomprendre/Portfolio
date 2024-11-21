@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Vertical line connecting the dots -->
+  <line x1="50" y1="30" x2="50" y2="70" stroke="black" stroke-width="8"/>
+  
+  <!-- Two dots -->
+  <circle cx="50" cy="30" r="12" fill="black"/>
+  <circle cx="50" cy="70" r="12" fill="black"/>
+</svg>
