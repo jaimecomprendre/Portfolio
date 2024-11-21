@@ -323,7 +323,7 @@
             <h3>TOSS 2022</h3>
             <p>A stunning visual exploration showcasing innovative design principles and creative thinking.</p>
         </div>
-        <div class="slideshow-container">
+        <div class="slideshow-container" id="slideshow-1">
             <div class="slide active">
                 <img src="https://i.imgur.com/hCxENDE.jpg" alt="Creative Design Visual 1">
             </div>
@@ -333,13 +333,9 @@
             <div class="slide">
                 <img src="https://imgur.com/DqpGXUy.jpg" alt="Creative Design Visual 3">
             </div>
-            <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
-            <button class="next" onclick="changeSlide(1)">&#10095;</button>
-            <div class="dots-container">
-                <span class="dot active" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
-            </div>
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+            <div class="dots-container"></div>
         </div>
     </div>
 
@@ -348,42 +344,19 @@
             <h3>TOSS 2022</h3>
             <p>A stunning visual exploration showcasing innovative design principles and creative thinking.</p>
         </div>
-        <div class="slideshow-container">
+        <div class="slideshow-container" id="slideshow-2">
             <div class="slide active">
-                <img src="https://i.imgur.com/hCxENDE.jpg" alt="Creative Design Visual 1">
+                <img src="https://imgur.com/o4I5eSP.jpg" alt="Quadra 1">
             </div>
             <div class="slide">
-                <img src="https://i.imgur.com/KrVwT9m.jpg" alt="Creative Design Visual 2">
+                <img src="https://imgur.com/MIffIxc.jpg" alt="Quadra 2">
             </div>
-            <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
-            <button class="next" onclick="changeSlide(1)">&#10095;</button>
-            <div class="dots-container">
-                <span class="dot active" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-            </div>
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+            <div class="dots-container"></div>
         </div>
     </div>
 
-    <div class="project-card">
-        <div class="project-info">
-            <h3>TOSS 2022</h3>
-            <p>A stunning visual exploration showcasing innovative design principles and creative thinking.</p>
-        </div>
-        <div class="slideshow-container">
-            <div class="slide active">
-                <img src="https://imgur.com/o4I5eSP.jpg" alt="Creative Design Visual 1">
-            </div>
-            <div class="slide">
-                <img src="https://imgur.com/MIffIxc.jpg" alt="Creative Design Visual 2">
-            </div>
-            <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
-            <button class="next" onclick="changeSlide(1)">&#10095;</button>
-            <div class="dots-container">
-                <span class="dot active" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-            </div>
-        </div>
-    </div>
 
     <div class="project-card">
         <div class="project-info">
@@ -558,80 +531,77 @@
   </section>
 
   <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize all slideshows
-            const slideshowContainers = document.querySelectorAll('.slideshow-container');
+    class Slideshow {
+        constructor(container) {
+            this.container = container;
+            this.slides = container.querySelectorAll('.slide');
+            this.slideIndex = 1;
+            this.dotsContainer = container.querySelector('.dots-container');
             
-            slideshowContainers.forEach((container, containerIndex) => {
-                const slides = container.querySelectorAll('.slide');
-                const dots = container.querySelectorAll('.dot');
-                let slideIndex = 1;
-
-                // Only set up controls if there's more than one slide
-                if (slides.length > 1) {
-                    // Set up prev/next buttons
-                    const prevButton = container.querySelector('.prev');
-                    const nextButton = container.querySelector('.next');
-                    
-                    if (prevButton && nextButton) {
-                        prevButton.onclick = () => changeSlide(containerIndex, -1);
-                        nextButton.onclick = () => changeSlide(containerIndex, 1);
-                    }
-
-                    // Set up dots
-                    dots.forEach((dot, index) => {
-                        dot.onclick = () => currentSlide(containerIndex, index + 1);
-                    });
-                } else {
-                    // If there's only one slide, hide the controls
-                    const controls = container.querySelectorAll('.prev, .next, .dots-container');
-                    controls.forEach(control => control.style.display = 'none');
-                }
-
-                // Show initial slide
-                showSlides(containerIndex, slideIndex);
-            });
-
-            // Maintain separate slideIndex for each slideshow
-            const slideIndices = new Array(slideshowContainers.length).fill(1);
-
-            function changeSlide(containerIndex, n) {
-                showSlides(containerIndex, slideIndices[containerIndex] += n);
+            this.setupDots();
+            this.setupControls();
+            this.showSlide(this.slideIndex);
+        }
+    
+        setupDots() {
+            // Create dots based on number of slides
+            for (let i = 0; i < this.slides.length; i++) {
+                const dot = document.createElement('span');
+                dot.className = 'dot';
+                dot.addEventListener('click', () => this.currentSlide(i + 1));
+                this.dotsContainer.appendChild(dot);
             }
-
-            function currentSlide(containerIndex, n) {
-                showSlides(containerIndex, slideIndices[containerIndex] = n);
+            this.dots = this.dotsContainer.querySelectorAll('.dot');
+        }
+    
+        setupControls() {
+            if (this.slides.length > 1) {
+                const prevButton = this.container.querySelector('.prev');
+                const nextButton = this.container.querySelector('.next');
+                
+                prevButton.addEventListener('click', () => this.changeSlide(-1));
+                nextButton.addEventListener('click', () => this.changeSlide(1));
+            } else {
+                // Hide controls if only one slide
+                const controls = this.container.querySelectorAll('.prev, .next, .dots-container');
+                controls.forEach(control => control.style.display = 'none');
             }
-
-            function showSlides(containerIndex, n) {
-                const container = slideshowContainers[containerIndex];
-                const slides = container.querySelectorAll('.slide');
-                const dots = container.querySelectorAll('.dot');
-                
-                if (!slides.length) return;
-
-                // Update slideIndex
-                if (n > slides.length) { slideIndices[containerIndex] = 1 }
-                if (n < 1) { slideIndices[containerIndex] = slides.length }
-                
-                // Hide all slides
-                slides.forEach(slide => {
-                    slide.classList.remove('active');
-                });
-                
-                // Remove active class from all dots
-                dots.forEach(dot => {
-                    dot.classList.remove('active');
-                });
-                
-                // Show current slide and dot
-                const currentIndex = slideIndices[containerIndex] - 1;
-                slides[currentIndex].classList.add('active');
-                if (dots[currentIndex]) {
-                    dots[currentIndex].classList.add('active');
-                }
+        }
+    
+        changeSlide(n) {
+            this.showSlide(this.slideIndex += n);
+        }
+    
+        currentSlide(n) {
+            this.showSlide(this.slideIndex = n);
+        }
+    
+        showSlide(n) {
+            if (n > this.slides.length) { this.slideIndex = 1; }
+            if (n < 1) { this.slideIndex = this.slides.length; }
+    
+            // Hide all slides
+            this.slides.forEach(slide => slide.classList.remove('active'));
+            
+            // Remove active class from all dots
+            this.dots.forEach(dot => dot.classList.remove('active'));
+            
+            // Show current slide and dot
+            const currentIndex = this.slideIndex - 1;
+            this.slides[currentIndex].classList.add('active');
+            if (this.dots[currentIndex]) {
+                this.dots[currentIndex].classList.add('active');
             }
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize all slideshows
+        const slideshowContainers = document.querySelectorAll('.slideshow-container');
+        slideshowContainers.forEach(container => {
+            new Slideshow(container);
         });
+    });
     </script>
 </body>
 </html>
