@@ -67,6 +67,44 @@
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
 
+        /* Video container styling */
+        .project-media {
+            position: relative;  /* For play button positioning */
+        }
+
+        /* Play button overlay */
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 2;
+            border: 2px solid white;
+        }
+
+        .play-button::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 20px;
+            border-color: transparent transparent transparent white;
+            margin-left: 5px;
+        }
+
+        /* Hide native video controls play button */
+        video::-webkit-media-controls-start-playback-button {
+            display: none;
+        }
+
         /* Navigation */
         .navbar {
             position: fixed;
@@ -412,16 +450,15 @@
     <h1 style="text-align: left;">Studio Apelbaum</h1>
 
     <div class="project-card">
-      <div class="project-media">
+        <div class="project-info">
+          <h3>Motion Graphics</h3>
+          <p>An engaging animation showcasing smooth transitions and dynamic visual effects.</p>
+        </div>
+        <div class="play-button"></div>
         <video controls>
           <source src="https://i.imgur.com/DYKrfgs.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
-      </div>
-      <div class="project-info">
-        <h3>Motion Graphics</h3>
-        <p>An engaging animation showcasing smooth transitions and dynamic visual effects.</p>
-      </div>
     </div>
 
     <div class="project-card">
@@ -584,5 +621,67 @@
         });
     });
     </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize slideshows (your existing code)
+        const slideshowContainers = document.querySelectorAll('.slideshow-container');
+        slideshowContainers.forEach(container => {
+            new Slideshow(container);
+        });
+
+        // Video player functionality
+        const videos = document.querySelectorAll('video');
+        const playButtons = document.querySelectorAll('.play-button');
+
+        // Function to stop all videos
+        function stopAllVideos() {
+            videos.forEach(video => {
+                video.pause();
+                video.currentTime = 0;
+                // Show play button when video is stopped
+                video.parentElement.querySelector('.play-button').style.display = 'flex';
+            });
+        }
+
+        // Add click handlers to all play buttons
+        playButtons.forEach((button, index) => {
+            button.addEventListener('click', function() {
+                const video = videos[index];
+                stopAllVideos(); // Stop all other videos
+                video.play();
+                this.style.display = 'none'; // Hide play button when playing
+            });
+        });
+
+        // Show play button when video ends
+        videos.forEach(video => {
+            video.addEventListener('ended', function() {
+                this.parentElement.querySelector('.play-button').style.display = 'flex';
+            });
+
+            // Show play button when video is paused
+            video.addEventListener('pause', function() {
+                this.parentElement.querySelector('.play-button').style.display = 'flex';
+            });
+
+            // Hide play button when video is playing
+            video.addEventListener('playing', function() {
+                this.parentElement.querySelector('.play-button').style.display = 'none';
+            });
+
+            // Stop other videos when a new one starts playing
+            video.addEventListener('play', function() {
+                videos.forEach(otherVideo => {
+                    if (otherVideo !== this) {
+                        otherVideo.pause();
+                        otherVideo.currentTime = 0;
+                        otherVideo.parentElement.querySelector('.play-button').style.display = 'flex';
+                    }
+                });
+            });
+        });
+    });
+</script>
 </body>
 </html>
