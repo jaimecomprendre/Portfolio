@@ -328,12 +328,33 @@
     </div>
 
     <div class="project-card">
-        <div class="project-media">
-          <img src="https://imgur.com/o4I5eSP.jpg" alt="Project 2">
+        <div class="project-info">
+            <h3>TOSS 2022</h3>
+            <p>A stunning visual exploration showcasing innovative design principles and creative thinking.</p>
         </div>
+        <div class="slideshow-container">
+            <div class="slide active">
+                <img src="https://imgur.com/o4I5eSP.jpg" alt="Creative Design Visual 1">
+            </div>
+            <div class="slide">
+                <img src="https://imgur.com/MIffIxc.jpg" alt="Creative Design Visual 2">
+            </div>
+            <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+            <button class="next" onclick="changeSlide(1)">&#10095;</button>
+            <div class="dots-container">
+                <span class="dot active" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="project-card">
         <div class="project-info">
           <h3>Urban Photography</h3>
           <p>Capturing the essence of city life through a unique architectural perspective.</p>
+        </div>
+        <div class="project-media">
+          <img src="https://imgur.com/o4I5eSP.jpg" alt="Project 2">
         </div>
     </div>
 
