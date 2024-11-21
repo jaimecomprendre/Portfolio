@@ -3,57 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Portfolio</title>
     <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+        }
+
+        #home {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 80px;
+            text-align: center;
+            position: relative;
+            background-image: url('https://imgur.com/37Nwmku.jpg');  /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;  /* Creates a parallax effect */
+            isolation: isolate;  /* Creates a new stacking context */
+        }
+
+        /* Dark overlay */
+        #home::after {
+            content: '';
+            position: absolute;
+            inset: 0;  /* Same as top: 0; right: 0; bottom: 0; left: 0; */
+            background: linear-gradient(
+                rgba(0, 0, 0, 0.7),
+                rgba(0, 0, 0, 0.8)
+            );
+            z-index: -1;
+        }
+
+        /* Make text more visible */
+        #home h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        #home p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-            color: #333;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: flex-start;
+            gap: 3rem;
         }
 
-        nav {
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        nav a {
-            margin-right: 20px;
+        .nav-link {
+            color: #ffffff;
             text-decoration: none;
-            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 1rem;
         }
 
-        .hero {
+        .nav-link:hover {
+            color: #a8a8a8;
+        }
+
+        /* Hero Section */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 80px;
             text-align: center;
-            padding: 4rem 2rem;
-            background: white;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .projects {
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        /* Projects Grid */
+        #projects {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
-            margin-bottom: 2rem;
+            padding: 2rem 0;
         }
 
         .project-card {
-            background: white;
-            border-radius: 8px;
+            background-color: #111111;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .project-card img, .project-card video {
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-media {
             width: 100%;
-            height: 200px;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .project-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-media video {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
         }
 
@@ -61,54 +164,260 @@
             padding: 1.5rem;
         }
 
-        footer {
+        .project-info h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .project-info p {
+            color: #a8a8a8;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        #contact {
+            padding: 4rem 2rem;
             text-align: center;
-            padding: 2rem;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background-color: #111111;
+        }
+
+        #contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        #contact a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        #contact a:hover {
+            color: #a8a8a8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-container {
+                padding: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </div>
     </nav>
 
-    <section class="hero" id="home">
-        <h1>Your Name</h1>
-        <p>Your professional title or tagline</p>
-    </section>
+  <section id="home" class="hero">
+    <h1>Hubert Maxime</h1>
+    <p>Light Designer/ Technician</p>
+  </section>
 
-    <section class="projects" id="projects">
-        <!-- Project Card Template -->
-        <div class="project-card">
-            <img src="/path/to/your/image.jpg" alt="Project description">
-            <div class="project-info">
-                <h3>Project Title</h3>
-                <p>Project description goes here</p>
-            </div>
+  <section id="projects">
+    <h1 style="text-align: center;">Projects</h1>
+    <h2 style="text-align: left;">SBCS</h2>
+    <div class="project-card">
+        <div class="project-info">
+          <h3>TOSS 2022</h3>
+          <p>A stunning visual exploration showcasing innovative design principles and creative thinking.</p>
         </div>
-
-        <!-- Video Project Card Template -->
-        <div class="project-card">
-            <video controls>
-                <source src="/path/to/your/video.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="project-info">
-                <h3>Video Project Title</h3>
-                <p>Video project description goes here</p>
-            </div>
+        <div class="project-gallery">
+          <div class="project-media">
+            <img src="https://i.imgur.com/hCxENDE.jpg" alt="Creative Design Visual 1">
+          </div>
+          <div class="project-media">
+            <img src="https://i.imgur.com/KrVwT9m.jpg" alt="Creative Design Visual 2">
+          </div>
+          <div class="project-media">
+            <img src="https://imgur.com/DqpGXUy.jpg" alt="Creative Design Visual 3"> 
+          </div>
         </div>
-    </section>
+      </div>
 
-    <footer id="contact">
-        <h2>Contact Me</h2>
-        <p>Email: your.email@example.com</p>
-        <p>LinkedIn: linkedin.com/in/yourprofile</p>
-    </footer>
+    <div class="project-card">
+        <div class="project-media">
+          <img src="https://imgur.com/o4I5eSP.jpg" alt="Project 2">
+        </div>
+        <div class="project-info">
+          <h3>Urban Photography</h3>
+          <p>Capturing the essence of city life through a unique architectural perspective.</p>
+        </div>
+    </div>
+
+    <div class="project-card">
+        <div class="project-media">
+          <img src="https://imgur.com/MIffIxc.jpg" alt="Project 2">
+        </div>
+        <div class="project-info">
+          <h3>Urban Photography</h3>
+          <p>Capturing the essence of city life through a unique architectural perspective.</p>
+        </div>
+    </div>
+
+    <div class="project-card">
+        <div class="project-media">
+          <img src="https://imgur.com/QfjIola.jpg" alt="Project 2">
+        </div>
+        <div class="project-info">
+          <h3>Urban Photography</h3>
+          <p>Capturing the essence of city life through a unique architectural perspective.</p>
+        </div>
+    </div>
+
+    <div class="project-card">
+        <div class="project-media">
+          <img src="https://imgur.com/D8YA2tv.jpg" alt="Project 2">
+        </div>
+        <div class="project-info">
+          <h3>Urban Photography</h3>
+          <p>Capturing the essence of city life through a unique architectural perspective.</p>
+        </div>
+    </div>
+
+    <div class="project-card">
+        <div class="project-media">
+          <img src="https://imgur.com/J27QlSW.jpg" alt="Project 2">
+        </div>
+        <div class="project-info">
+          <h3>Urban Photography</h3>
+          <p>Capturing the essence of city life through a unique architectural perspective.</p>
+        </div>
+    </div>
+
+    <div class="project-card">
+        <div class="project-media">
+            <img src="https://lh3.googleusercontent.com/d/1bZgP3Q3IZtsZ1Jd2AwyH5qa9wzMp6lil" alt="Your image description">
+        </div>
+        <div class="project-info">
+          <h3>Urban Photography</h3>
+          <p>Capturing the essence of city life through a unique architectural perspective.</p>
+        </div>
+    </div>
+
+    <div class="project-card">
+        <div class="project-media">
+          <img src="https://imgur.com/W8vIYCE.jpg" alt="Project 2">
+        </div>
+        <div class="project-info">
+          <h3>Urban Photography</h3>
+          <p>Capturing the essence of city life through a unique architectural perspective.</p>
+        </div>
+    </div>
+
+    <h1>Studio Apelbaum</h1>
+
+    <div class="project-card">
+      <div class="project-media">
+        <video controls>
+          <source src="https://i.imgur.com/DYKrfgs.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="project-info">
+        <h3>Motion Graphics</h3>
+        <p>An engaging animation showcasing smooth transitions and dynamic visual effects.</p>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-media">
+        <video controls>
+          <source src="https://i.imgur.com/89j0mvK.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="project-info">
+        <h3>Interactive Experience</h3>
+        <p>A user-centered design approach bringing digital interactions to life.</p>
+      </div>
+    </div>
+
+    <div class="project-card">
+        <div class="project-media">
+          <video controls>
+            <source src="https://imgur.com/EmF1MTM.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="project-info">
+          <h3>Motion Graphics</h3>
+          <p>An engaging animation showcasing smooth transitions and dynamic visual effects.</p>
+        </div>
+      </div>
+  
+    <div class="project-card">
+        <div class="project-media">
+          <video controls>
+            <source src="https://imgur.com/pEx0Jls.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="project-info">
+          <h3>Interactive Experience</h3>
+          <p>A user-centered design approach bringing digital interactions to life.</p>
+        </div>
+    </div>
+
+    <div class="project-card">
+        <div class="project-media">
+          <video controls>
+            <source src="https://imgur.com/O1VIntm.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="project-info">
+          <h3>Motion Graphics</h3>
+          <p>An engaging animation showcasing smooth transitions and dynamic visual effects.</p>
+        </div>
+    </div>
+  
+    <div class="project-card">
+        <div class="project-media">
+          <video controls>
+            <source src="https://imgur.com/EYmQuJj.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="project-info">
+          <h3>Interactive Experience</h3>
+          <p>A user-centered design approach bringing digital interactions to life.</p>
+        </div>
+    </div>
+
+    <div class="project-card">
+        <div class="project-media">
+          <video controls>
+            <source src="https://imgur.com/LEw4Ort.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="project-info">
+          <h3>Interactive Experience</h3>
+          <p>A user-centered design approach bringing digital interactions to life.</p>
+        </div>
+    </div>
+
+    <!-- Continue with remaining images and videos in the same pattern -->
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Contact Me</h2>
+    <p>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a></p>
+  </section>
 </body>
 </html>
