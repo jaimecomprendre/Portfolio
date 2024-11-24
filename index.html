@@ -40,6 +40,14 @@
             isolation: isolate;  /* Creates a new stacking context */
         }
 
+         /* For mobile devices, adjust background attachment */
+         @media (max-width: 768px) {
+            #home {
+                background-attachment: scroll; /* Remove fixed attachment on mobile */
+                background-position: center center;
+            }
+        }
+
         /* Dark overlay */
         #home::after {
             content: '';
@@ -167,6 +175,26 @@
 
         .nav-item:hover .dropdown-content {
             display: block;
+        }
+
+        @media (max-width: 768px) {
+            .nav-item.show .dropdown-content {
+                display: block;
+                position: fixed;
+                top: auto;
+                width: 100%;
+                left: 0;
+                margin-top: 0;
+            }
+
+            .dropdown-content {
+                width: 100%;
+                left: 0;
+            }
+
+            .dropdown-content a {
+                padding: 15px 20px; /* Larger touch targets for mobile */
+            }
         }
 
         .dropdown-content a {
