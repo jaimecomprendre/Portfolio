@@ -116,7 +116,34 @@
             z-index: 1000;
             background-color: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px); /* For Safari */
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateZ(0); /* Forces hardware acceleration */
+            will-change: transform; /* Optimizes for animations */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        }
+
+        /* Mobile-specific navbar adjustments */
+        @media (max-width: 768px) {
+            .navbar {
+                position: fixed; /* Reinforce fixed positioning */
+                width: 100%;
+                -webkit-transform: translateZ(0); /* iOS specific hardware acceleration */
+            }
+            
+            .nav-container {
+                padding: 0.75rem 1rem; /* Slightly smaller padding on mobile */
+            }
+            
+            /* Adjust spacing below navbar */
+            #home {
+                padding-top: 60px; /* Reduced padding on mobile */
+            }
+            
+            /* Prevent content from scrolling under navbar */
+            body {
+                padding-top: 50px; /* Match navbar height */
+            }
         }
 
         .nav-container {
@@ -136,6 +163,10 @@
             font-size: 1rem;
         }
 
+        .nav-link:hover {
+            color: #a8a8a8;
+        }
+
         .nav-item {
             position: relative;
             display: inline-block;
@@ -149,8 +180,42 @@
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index: 1001;
             border-radius: 4px;
+            top: 100%; /* Position it right below the nav item */
+            left: 0;
+        }
+
+        /* Add invisible padding bridge */
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            height: 20px;
+            width: 100%;
             top: 100%;
             left: 0;
+        }
+
+        .nav-item:hover .dropdown-content {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .nav-item.show .dropdown-content {
+                display: block;
+                position: fixed;
+                top: auto;
+                width: 100%;
+                left: 0;
+                margin-top: 0;
+            }
+
+            .dropdown-content {
+                width: 100%;
+                left: 0;
+            }
+
+            .dropdown-content a {
+                padding: 15px 20px; /* Larger touch targets for mobile */
+            }
         }
 
         .dropdown-content a {
@@ -165,34 +230,12 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
 
-        /* Mobile-specific styles */
-        @media (max-width: 768px) {
-            .nav-item .dropdown-content {
-                position: fixed;
-                top: auto;
-                left: 0;
-                right: 0;
-                width: 100%;
-                margin-top: 0;
-            }
-
-            .dropdown-content a {
-                padding: 15px 20px;
-                text-align: center;
-            }
-
-            .nav-link.has-dropdown::after {
-                content: '▼';
-                font-size: 0.7em;
-                margin-left: 5px;
-                display: inline-block;
-                vertical-align: middle;
-            }
-
-            #home {
-                background-attachment: scroll;
-                background-position: center center;
-            }
+        .nav-link.has-dropdown::after {
+            content: '▼';
+            font-size: 0.7em;
+            margin-left: 5px;
+            display: inline-block;
+            vertical-align: middle;
         }
 
         /* Hero Section */
