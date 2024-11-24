@@ -151,7 +151,18 @@
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index: 1001;
             border-radius: 4px;
-            margin-top: 0.5rem;
+            top: 100%; /* Position it right below the nav item */
+            left: 0;
+        }
+
+        /* Add invisible padding bridge */
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            height: 20px;
+            width: 100%;
+            top: 100%;
+            left: 0;
         }
 
         .nav-item:hover .dropdown-content {
@@ -170,7 +181,6 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
 
-        /* Add a small arrow indicator */
         .nav-link.has-dropdown::after {
             content: '▼';
             font-size: 0.7em;
