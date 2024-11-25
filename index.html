@@ -144,14 +144,7 @@
             position: relative;
             display: inline-block;
         }
-
-        .nav-link.has-dropdown::after {
-            content: '▼';
-            font-size: 0.7em;
-            margin-left: 5px;
-            display: inline-block;
-            vertical-align: middle;
-        }
+        
 
         .dropdown-content {
             display: none;
@@ -161,8 +154,22 @@
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index: 1001;
             border-radius: 4px;
+            top: 100%; /* Position it right below the nav item */
+            left: 0;
+        }
+
+        /* Add invisible padding bridge */
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            height: 20px;
+            width: 100%;
             top: 100%;
             left: 0;
+        }
+
+        .nav-item:hover .dropdown-content {
+            display: block;
         }
 
         .dropdown-content a {
@@ -177,32 +184,12 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
 
-        /* Mobile styles */
-        @media (max-width: 768px) {
-            .nav-item {
-                position: static;  /* Changed from relative */
-            }
-            
-            .dropdown-content {
-                position: fixed;  /* Changed from absolute */
-                left: 0;
-                right: 0;
-                width: 100%;
-                top: 64px;  /* Adjust based on your navbar height */
-                border-radius: 0;
-            }
-
-            .nav-item:focus-within .dropdown-content {
-                display: block;
-            }
-
-            .nav-link:focus + .dropdown-content {
-                display: block;
-            }
-
-            .dropdown-content a {
-                padding: 16px 24px;  /* Larger touch targets */
-            }
+        .nav-link.has-dropdown::after {
+            content: '▼';
+            font-size: 0.7em;
+            margin-left: 5px;
+            display: inline-block;
+            vertical-align: middle;
         }
         
 
