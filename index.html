@@ -962,7 +962,7 @@ document.addEventListener('DOMContentLoaded', function () {
     dropdownItems.forEach(item => {
         // Attach click event listener
         item.addEventListener('click', function (e) {
-            // Prevent the default link behavior
+            // Prevent the default only for the dropdown toggle
             e.preventDefault();
 
             // Check if the dropdown is already open
@@ -983,6 +983,15 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!e.target.closest('[data-toggle="dropdown"]')) {
             dropdownItems.forEach(item => item.classList.remove('active'));
         }
+    });
+
+    // Enable navigation for links inside the dropdown
+    const dropdownLinks = document.querySelectorAll('.dropdown-content a');
+    dropdownLinks.forEach(link => {
+        link.addEventListener('click', function () {
+            // Close the dropdown after clicking a link
+            dropdownItems.forEach(item => item.classList.remove('active'));
+        });
     });
 });
 
