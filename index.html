@@ -392,6 +392,29 @@
             background-color: #ffffff;
         }
 
+        .contact-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info {
+            text-align: left;
+        }
+
+        .contact-image img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* Makes the image circular */
+            border: 2px solid white;
+            object-fit: cover;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+
         /* Add styles for the LinkedIn link */
         #contact a[href*="linkedin"] {
             text-decoration: underline;
@@ -809,11 +832,19 @@
   </section>
 
   <section id="contact" class="contact">
-    <h2>Contact Me</h2>
-    <p>Email: <a href="mailto:maxime.hubert@student-cs.fr">maxime.hubert@student-cs.fr</a></p>
-    <p>Phone: +33 6 95 69 84 19</p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/maxime-hubert0/" target="_blank">LinkedIn</a></p>
-  </section>
+        <h2>Contact Me</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <p>Email: <a href="mailto:maxime.hubert@student-cs.fr">maxime.hubert@student-cs.fr</a></p>
+                <p>Phone: +33 6 95 69 84 19</p>
+                <p>LinkedIn: <a href="https://www.linkedin.com/in/maxime-hubert0/" target="_blank">LinkedIn</a></p>
+            </div>
+            <div class="contact-image">
+                <img src="https://imgur.com/ZGnwCjp.jpg" alt="Maxime Hubert">
+            </div>
+        </div>
+    </section>
+
 
   <script>
     class Slideshow {
