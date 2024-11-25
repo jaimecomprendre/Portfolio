@@ -961,21 +961,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     dropdownItems.forEach(item => {
         // Attach click event listener to toggle dropdown
-        item.addEventListener('click', function (e) {
+        item.querySelector('.nav-link').addEventListener('click', function (e) {
+            // Prevent default link behavior
+            e.preventDefault();
+
+            // Toggle dropdown visibility
             const isActive = item.classList.contains('active');
-            
-            // Close all open dropdowns
-            dropdownItems.forEach(otherItem => otherItem.classList.remove('active'));
-
-            // Toggle the clicked dropdown
-            if (!isActive) {
-                item.classList.add('active');
-            }
-
-            // Prevent default only for dropdown toggle links
-            if (!e.target.closest('.dropdown-content a')) {
-                e.preventDefault();
-            }
+            dropdownItems.forEach(otherItem => otherItem.classList.remove('active')); // Close others
+            if (!isActive) item.classList.add('active'); // Toggle current
         });
     });
 
@@ -983,7 +976,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const dropdownLinks = document.querySelectorAll('.dropdown-content a');
     dropdownLinks.forEach(link => {
         link.addEventListener('click', function () {
-            // Close all dropdowns after clicking a link
+            // Close dropdown when navigating to a section
             dropdownItems.forEach(item => item.classList.remove('active'));
         });
     });
