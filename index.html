@@ -460,7 +460,7 @@
                     <a href="#sbcs">SBCS</a>
                     <a href="#studio-apelbaum">Studio Apelbaum</a>
                 </div>
-            </div>            
+            </div>                       
             <a href="#contact" class="nav-link">Contact</a>
         </div>
     </nav>
@@ -956,34 +956,36 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    // Select all dropdown items
     const dropdownItems = document.querySelectorAll('[data-toggle="dropdown"]');
 
     dropdownItems.forEach(item => {
+        // Attach click event listener
         item.addEventListener('click', function (e) {
-            // Prevent the default anchor behavior
+            // Prevent the default link behavior
             e.preventDefault();
 
-            // Close all open dropdowns
-            dropdownItems.forEach(otherItem => {
-                if (otherItem !== item) {
-                    otherItem.classList.remove('active');
-                }
-            });
+            // Check if the dropdown is already open
+            const isActive = item.classList.contains('active');
 
-            // Toggle the current dropdown
-            item.classList.toggle('active');
+            // Close all open dropdowns
+            dropdownItems.forEach(otherItem => otherItem.classList.remove('active'));
+
+            // Toggle the clicked dropdown
+            if (!isActive) {
+                item.classList.add('active');
+            }
         });
     });
 
-    // Close dropdown when clicking elsewhere
+    // Close dropdown when clicking outside
     document.addEventListener('click', function (e) {
         if (!e.target.closest('[data-toggle="dropdown"]')) {
-            dropdownItems.forEach(item => {
-                item.classList.remove('active');
-            });
+            dropdownItems.forEach(item => item.classList.remove('active'));
         }
     });
 });
+
 </script>
 
 </body>
