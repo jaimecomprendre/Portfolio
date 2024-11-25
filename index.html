@@ -191,6 +191,14 @@
             display: inline-block;
             vertical-align: middle;
         }
+
+        .nav-item .dropdown-content {
+            display: none;
+        }
+        .nav-item.active .dropdown-content {
+            display: block;
+        }
+
         
 
         /* Hero Section */
@@ -446,13 +454,13 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="#home" class="nav-link">Home</a>
-            <div class="nav-item">
+            <div class="nav-item" data-toggle="dropdown">
                 <a href="#projects" class="nav-link has-dropdown">Projects</a>
                 <div class="dropdown-content">
                     <a href="#sbcs">SBCS</a>
                     <a href="#studio-apelbaum">Studio Apelbaum</a>
                 </div>
-            </div>
+            </div>            
             <a href="#contact" class="nav-link">Contact</a>
         </div>
     </nav>
@@ -944,6 +952,38 @@
             });
         });
     });
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const dropdownItems = document.querySelectorAll('[data-toggle="dropdown"]');
+
+    dropdownItems.forEach(item => {
+        item.addEventListener('click', function (e) {
+            // Prevent the default anchor behavior
+            e.preventDefault();
+
+            // Close all open dropdowns
+            dropdownItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                }
+            });
+
+            // Toggle the current dropdown
+            item.classList.toggle('active');
+        });
+    });
+
+    // Close dropdown when clicking elsewhere
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('[data-toggle="dropdown"]')) {
+            dropdownItems.forEach(item => {
+                item.classList.remove('active');
+            });
+        }
+    });
+});
 </script>
 
 </body>
