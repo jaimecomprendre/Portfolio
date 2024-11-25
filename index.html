@@ -145,16 +145,20 @@
             display: inline-block;
         }
 
+        .dropdown-content.show {
+        display: block;
+        }
+
         .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: rgba(0, 0, 0, 0.9);
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1001;
-            border-radius: 4px;
-            top: 100%; /* Position it right below the nav item */
-            left: 0;
+        display: none;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.9);
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1001;
+        border-radius: 4px;
+        top: 100%;
+        left: 0;
         }
 
         /* Add invisible padding bridge */
@@ -939,6 +943,37 @@
                         otherVideo.parentElement.querySelector('.play-button').style.display = 'flex';
                     }
                 });
+            });
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const projectsLink = document.querySelector('.nav-link.has-dropdown');
+        const dropdownContent = document.querySelector('.dropdown-content');
+        let isOpen = false;
+    
+        // Toggle dropdown when clicking Projects link
+        projectsLink.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent jumping to #projects
+            isOpen = !isOpen;
+            dropdownContent.classList.toggle('show');
+        });
+    
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!projectsLink.contains(e.target) && !dropdownContent.contains(e.target)) {
+                dropdownContent.classList.remove('show');
+                isOpen = false;
+            }
+        });
+    
+        // Handle dropdown link clicks
+        dropdownContent.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                dropdownContent.classList.remove('show');
+                isOpen = false;
             });
         });
     });
