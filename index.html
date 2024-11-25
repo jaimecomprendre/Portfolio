@@ -116,34 +116,7 @@
             z-index: 1000;
             background-color: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px); /* For Safari */
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transform: translateZ(0); /* Forces hardware acceleration */
-            will-change: transform; /* Optimizes for animations */
-            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-        }
-
-        /* Mobile-specific navbar adjustments */
-        @media (max-width: 768px) {
-            .navbar {
-                position: fixed; /* Reinforce fixed positioning */
-                width: 100%;
-                -webkit-transform: translateZ(0); /* iOS specific hardware acceleration */
-            }
-            
-            .nav-container {
-                padding: 0.75rem 1rem; /* Slightly smaller padding on mobile */
-            }
-            
-            /* Adjust spacing below navbar */
-            #home {
-                padding-top: 60px; /* Reduced padding on mobile */
-            }
-            
-            /* Prevent content from scrolling under navbar */
-            body {
-                padding-top: 50px; /* Match navbar height */
-            }
         }
 
         .nav-container {
@@ -196,26 +169,6 @@
 
         .nav-item:hover .dropdown-content {
             display: block;
-        }
-
-        @media (max-width: 768px) {
-            .nav-item.show .dropdown-content {
-                display: block;
-                position: fixed;
-                top: auto;
-                width: 100%;
-                left: 0;
-                margin-top: 0;
-            }
-
-            .dropdown-content {
-                width: 100%;
-                left: 0;
-            }
-
-            .dropdown-content a {
-                padding: 15px 20px; /* Larger touch targets for mobile */
-            }
         }
 
         .dropdown-content a {
