@@ -144,7 +144,14 @@
             position: relative;
             display: inline-block;
         }
-        
+
+        .nav-link.has-dropdown::after {
+            content: '▼';
+            font-size: 0.7em;
+            margin-left: 5px;
+            display: inline-block;
+            vertical-align: middle;
+        }
 
         .dropdown-content {
             display: none;
@@ -154,22 +161,8 @@
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index: 1001;
             border-radius: 4px;
-            top: 100%; /* Position it right below the nav item */
-            left: 0;
-        }
-
-        /* Add invisible padding bridge */
-        .nav-item::after {
-            content: '';
-            position: absolute;
-            height: 20px;
-            width: 100%;
             top: 100%;
             left: 0;
-        }
-
-        .nav-item:hover .dropdown-content {
-            display: block;
         }
 
         .dropdown-content a {
@@ -184,54 +177,31 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
 
-        .nav-link.has-dropdown::after {
-            content: '▼';
-            font-size: 0.7em;
-            margin-left: 5px;
-            display: inline-block;
-            vertical-align: middle;
-        }
-
+        /* Mobile styles */
         @media (max-width: 768px) {
-            .nav-item input[type="checkbox"] {
-                display: none;
+            .nav-item {
+                position: static;  /* Changed from relative */
             }
+            
             .dropdown-content {
-                display: none;
-                position: absolute;
-                background-color: rgba(0, 0, 0, 0.9);
-                min-width: 160px;
-                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-                z-index: 1001;
-                border-radius: 4px;
-                top: 100%;
+                position: fixed;  /* Changed from absolute */
                 left: 0;
+                right: 0;
+                width: 100%;
+                top: 64px;  /* Adjust based on your navbar height */
+                border-radius: 0;
             }
-            .nav-item input[type="checkbox"]:checked ~ .dropdown-content {
+
+            .nav-item:focus-within .dropdown-content {
                 display: block;
             }
-            /* Hide dropdown when scrolling using CSS only */
-            @supports (-webkit-touch-callout: none) {
-                /* iOS devices */
-                .nav-item:active .dropdown-content {
-                    display: none;
-                }
+
+            .nav-link:focus + .dropdown-content {
+                display: block;
             }
-            @supports not (-webkit-touch-callout: none) {
-                /* Non-iOS devices */
-                .nav-item:hover .dropdown-content {
-                    display: none;
-                }
-            }
+
             .dropdown-content a {
-                color: white;
-                padding: 12px 16px;
-                text-decoration: none;
-                display: block;
-                transition: background-color 0.3s ease;
-            }
-            .dropdown-content a:hover {
-                background-color: rgba(255, 255, 255, 0.1);
+                padding: 16px 24px;  /* Larger touch targets */
             }
         }
         
