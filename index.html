@@ -956,18 +956,14 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    // Select all dropdown items
+    // Select all dropdown toggles
     const dropdownItems = document.querySelectorAll('[data-toggle="dropdown"]');
 
     dropdownItems.forEach(item => {
-        // Attach click event listener
+        // Attach click event listener to toggle dropdown
         item.addEventListener('click', function (e) {
-            // Prevent the default only for the dropdown toggle
-            e.preventDefault();
-
-            // Check if the dropdown is already open
             const isActive = item.classList.contains('active');
-
+            
             // Close all open dropdowns
             dropdownItems.forEach(otherItem => otherItem.classList.remove('active'));
 
@@ -975,6 +971,20 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!isActive) {
                 item.classList.add('active');
             }
+
+            // Prevent default only for dropdown toggle links
+            if (!e.target.closest('.dropdown-content a')) {
+                e.preventDefault();
+            }
+        });
+    });
+
+    // Enable navigation for links inside the dropdown
+    const dropdownLinks = document.querySelectorAll('.dropdown-content a');
+    dropdownLinks.forEach(link => {
+        link.addEventListener('click', function () {
+            // Close all dropdowns after clicking a link
+            dropdownItems.forEach(item => item.classList.remove('active'));
         });
     });
 
@@ -984,16 +994,8 @@ document.addEventListener('DOMContentLoaded', function () {
             dropdownItems.forEach(item => item.classList.remove('active'));
         }
     });
-
-    // Enable navigation for links inside the dropdown
-    const dropdownLinks = document.querySelectorAll('.dropdown-content a');
-    dropdownLinks.forEach(link => {
-        link.addEventListener('click', function () {
-            // Close the dropdown after clicking a link
-            dropdownItems.forEach(item => item.classList.remove('active'));
-        });
-    });
 });
+
 
 </script>
 
