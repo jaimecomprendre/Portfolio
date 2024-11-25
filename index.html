@@ -264,13 +264,14 @@
         }
 
         .project-card .project-media video {
-            width: auto;
-            height: 100%;
-            max-width: 100%;
-            margin: 0 auto;
-            display: block;
-            object-fit: contain;
+            width: 100%; /* Make the video width fill the container */
+            height: auto; /* Maintain aspect ratio by adjusting height automatically */
+            max-width: 100%; /* Prevent video from exceeding the container's width */
+            display: block; /* Block-level element for proper centering */
+            margin: 0 auto; /* Center the video horizontally */
+            object-fit: fill; /* Stretch to fill the entire container */
         }
+
 
         /* Play button overlay */
         .project-card .project-media .play-button {
