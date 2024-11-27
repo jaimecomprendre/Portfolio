@@ -34,11 +34,18 @@
             text-align: center;
             position: relative;
             background-image: url('https://i.imgur.com/zrP02A8.jpg');  /* Replace with your image URL */
+            background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
             background-attachment: fixed;  /* Creates a parallax effect */
             isolation: isolate;  /* Creates a new stacking context */
         }
+        @media (max-width: 1300px) {
+            #home {
+                background-attachment: scroll;
+            }
+        }
+
 
         
 
