@@ -13,7 +13,7 @@
       return el('iframe', { src: 'https://www.youtube-nocookie.com/embed/' + m.id, title: m.title || 'Video',
         loading: 'lazy', allowFullscreen: true, allow: 'accelerometer; encrypted-media; picture-in-picture' });
     }
-    const v = el('video', { controls: true, preload: 'none', playsInline: true });
+    const v = el('video', { controls: true, playsInline: true });
     if (m.poster) v.poster = m.poster;
     v.append(el('source', { src: m.src, type: 'video/mp4' }));
     return v;
