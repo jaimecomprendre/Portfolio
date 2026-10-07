@@ -50,19 +50,28 @@
     });
   });
 
-  // Hero: as you scroll, the background blurs and drifts upward while the title fades
+  // Background artwork: scrolling blurs, warps and slowly twists the image across the whole page
   const bg = document.querySelector('.hero-bg');
   const hero = document.getElementById('home');
+  const warp = document.getElementById('warp-map');
   if (bg && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // The SVG warp is GPU/CPU heavy: skip it on small or low-power devices (blur + twist still apply)
+    const lite = innerWidth < 768 || (navigator.hardwareConcurrency || 8) <= 4;
     let queued = false;
     const update = () => {
-      const p = Math.min(window.scrollY / window.innerHeight, 1);
-      bg.style.transform = `translate3d(0, ${-p * 12}vh, 0) scale(1.15)`;
-      bg.style.filter = `blur(${p * 18}px)`;
+      const y = window.scrollY;
+      const p = Math.min(y / innerHeight, 1);                                          // first screen
+      const q = Math.min(y / Math.max(1, document.documentElement.scrollHeight - innerHeight), 1); // whole page
+      const f = [];
+      if (!lite && warp) { warp.setAttribute('scale', 200 * p + 140 * q); f.push('url(#warp)'); }
+      f.push(`blur(${p * 14}px)`, `hue-rotate(${q * 70}deg)`, `saturate(${1 + p * 0.4})`);
+      bg.style.filter = f.join(' ');
+      bg.style.transform = `translate3d(0, ${-p * 8}vh, 0) rotate(${p * 5 + q * 8}deg) scale(${1 + q * 0.1})`;
       hero.style.opacity = Math.max(0, 1 - p * 1.6);
       queued = false;
     };
     addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+    addEventListener('resize', update);
     update();
   }
 

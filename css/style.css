@@ -19,11 +19,12 @@ a { color:inherit; }
 
 /* Hero */
 /* The background lives on a fixed layer; main.js blurs and shifts it while scrolling */
-.hero-bg { position:fixed; inset:0; z-index:-1; transform:scale(1.15); will-change:transform,filter;
+.hero-bg { position:fixed; inset:-20%; z-index:-1; will-change:transform,filter;
   background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.8)), url('https://i.imgur.com/zrP02A8.jpg') center/cover no-repeat; }
 #home { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; padding-top:80px; text-align:center; }
-/* Content fades from transparent to black, so the blurred image shows through at first instead of a hard black edge */
-.page { position:relative; background:linear-gradient(to bottom, transparent, var(--bg) 70vh); }
+/* The page is transparent: the artwork stays visible behind everything, no black block */
+.page { position:relative; }
+.content p, .content li, .content h1, .content h2 { text-shadow:0 1px 8px rgba(0,0,0,.7); }
 h1 { font-size:3.5rem; font-weight:700; margin-bottom:1rem; }
 #home h1, #home p { text-shadow:2px 2px 4px rgba(0,0,0,.5); }
 #home p { font-size:1.2rem; }
@@ -36,7 +37,7 @@ h1 { font-size:3.5rem; font-weight:700; margin-bottom:1rem; }
 .center { text-align:center; margin:3rem 0; }
 
 /* Project cards */
-.project-card { background:var(--card); border-radius:12px; overflow:hidden; margin-bottom:3rem; box-shadow:0 4px 6px rgba(0,0,0,.1); }
+.project-card { background:rgba(10,10,10,.72); border-radius:12px; overflow:hidden; margin-bottom:3rem; box-shadow:0 4px 6px rgba(0,0,0,.1); }
 .project-info { padding:1.5rem; }
 .project-info h3 { font-size:1.25rem; margin-bottom:.5rem; }
 .content .project-info p { color:var(--muted); font-size:.9rem; margin-bottom:.25rem; }
@@ -59,7 +60,7 @@ h1 { font-size:3.5rem; font-weight:700; margin-bottom:1rem; }
 .prev:focus-visible, .next:focus-visible, .dot:focus-visible { outline:2px solid #fff; outline-offset:2px; }
 
 /* Contact */
-#contact { padding:4rem 2rem; text-align:center; background:var(--card); }
+#contact { padding:4rem 2rem; text-align:center; background:rgba(10,10,10,.6); backdrop-filter:blur(8px); }
 #contact h2 { font-size:2.5rem; margin-bottom:2rem; }
 #contact a[href*="linkedin"] { text-decoration:underline; }
 #contact a:hover { color:var(--muted); }
