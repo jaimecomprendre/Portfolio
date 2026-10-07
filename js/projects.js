@@ -3,6 +3,7 @@
      { type:'image',   src:'assets/photo.webp', alt:'...' }
      { type:'video',   src:'assets/clip.mp4', poster:'assets/clip.jpg' }   (poster optional)
      { type:'youtube', id:'VIDEO_ID' }
+     { type:'placeholder', label:'Photo' }   (grey box for templates; replace with a real image/video)
    Several media items on one project = automatic slideshow. */
 const imgur = (id, ext = 'jpg') => `https://imgur.com/${id}.${ext}`;
 const img = (id, alt) => ({ type: 'image', src: imgur(id), alt });
@@ -29,6 +30,22 @@ const PROJECTS = {
       media: [img('W8vIYCE', 'Scenography with 20 lyres and 4 K20')] },
     { title: 'Student party', description: ['Light design with 2 IVLs.'], media: [vid('efmP5zU')] },
     { title: 'Student party', description: ['Design and operation of the light scenography.'], media: [vid('6tAevvC')] }
+  ],
+  parallaxe: [
+    { title: 'Event name', description: ['Short description of your role and the setup (equipment, venue, audience size).'],
+      media: [{ type: 'placeholder', label: 'Video' }] },
+    { title: 'Event name', description: ['Template with several photos and videos: it becomes a slideshow automatically.'],
+      media: [{ type: 'placeholder', label: 'Photo 1' }, { type: 'placeholder', label: 'Photo 2' }, { type: 'placeholder', label: 'Video' }] },
+    { title: 'Event name', description: ['Template with a single photo.'],
+      media: [{ type: 'placeholder', label: 'Photo' }] }
+  ],
+  'concept-k': [
+    { title: 'Event name', description: ['Short description of your role and the setup (equipment, venue, audience size).'],
+      media: [{ type: 'placeholder', label: 'Video' }] },
+    { title: 'Event name', description: ['Template with several photos and videos: it becomes a slideshow automatically.'],
+      media: [{ type: 'placeholder', label: 'Photo 1' }, { type: 'placeholder', label: 'Photo 2' }, { type: 'placeholder', label: 'Video' }] },
+    { title: 'Event name', description: ['Template with a single photo.'],
+      media: [{ type: 'placeholder', label: 'Photo' }] }
   ],
   apelbaum: [
     { title: 'The Last Supper', description: ['Installation of paintings in our studio for a dinner. Design of sound-interactive light shaders.'],

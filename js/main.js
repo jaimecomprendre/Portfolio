@@ -8,6 +8,7 @@
   }
 
   function mediaNode(m) {
+    if (m.type === 'placeholder') return el('div', { className: 'placeholder', textContent: (m.label || 'Media') + ' – to be added' });
     if (m.type === 'image') return el('img', { src: m.src, alt: m.alt || '', loading: 'lazy' });
     if (m.type === 'youtube') {
       return el('iframe', { src: 'https://www.youtube-nocookie.com/embed/' + m.id, title: m.title || 'Video',
