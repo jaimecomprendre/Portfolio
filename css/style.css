@@ -18,10 +18,12 @@ a { color:inherit; }
 .dropdown-content a:hover { background:rgba(255,255,255,.1); }
 
 /* Hero */
-#home { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; padding-top:80px; text-align:center; position:relative; isolation:isolate;
-  background:url('https://i.imgur.com/zrP02A8.jpg') center/cover no-repeat fixed; }
-#home::after { content:''; position:absolute; inset:0; background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.8)); z-index:-1; }
-@media (max-width:1300px) { #home { background-attachment:scroll; } }
+/* The background lives on a fixed layer; main.js blurs and shifts it while scrolling */
+.hero-bg { position:fixed; inset:0; z-index:-1; transform:scale(1.15); will-change:transform,filter;
+  background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.8)), url('https://i.imgur.com/zrP02A8.jpg') center/cover no-repeat; }
+#home { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; padding-top:80px; text-align:center; }
+/* Content fades from transparent to black, so the blurred image shows through at first instead of a hard black edge */
+.page { position:relative; background:linear-gradient(to bottom, transparent, var(--bg) 70vh); }
 h1 { font-size:3.5rem; font-weight:700; margin-bottom:1rem; }
 #home h1, #home p { text-shadow:2px 2px 4px rgba(0,0,0,.5); }
 #home p { font-size:1.2rem; }

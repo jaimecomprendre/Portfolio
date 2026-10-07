@@ -50,6 +50,22 @@
     });
   });
 
+  // Hero: as you scroll, the background blurs and drifts upward while the title fades
+  const bg = document.querySelector('.hero-bg');
+  const hero = document.getElementById('home');
+  if (bg && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let queued = false;
+    const update = () => {
+      const p = Math.min(window.scrollY / window.innerHeight, 1);
+      bg.style.transform = `translate3d(0, ${-p * 12}vh, 0) scale(1.15)`;
+      bg.style.filter = `blur(${p * 18}px)`;
+      hero.style.opacity = Math.max(0, 1 - p * 1.6);
+      queued = false;
+    };
+    addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+    update();
+  }
+
   // Only one video plays at a time ('play' doesn't bubble, so listen in capture phase)
   document.addEventListener('play', e => {
     document.querySelectorAll('video').forEach(v => { if (v !== e.target) v.pause(); });
