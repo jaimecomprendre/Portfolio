@@ -56,9 +56,9 @@ const PROJECTS = {
     { title: 'CAN Football Cup', description: ['Integration of Pharos show control to run permanent shows across the CAN stadiums over time, during the cup and after for permanent installation.'],
       media: [vid('oN3224S', 'NDT 2022 – 1')] },
     { title: 'G7', description: ['Lighting direction for the G7 Finance event at Paris Bercy.'],
-      media: [vid('oN3224S', 'NDT 2022 – 1')] },
+      media: [img('d3LBVYS', 'NDT 2022 – 1'), img('QxJWlcr', 'NDT 2022 – 1')] },
     { title: 'IMA', description: ['Lighting direction for an event at the Institut du monde arabe, Paris.'],
-      media: [vid('oN3224S', 'NDT 2022 – 1')] }
+      media: [img('zZnWlQl', 'NDT 2022 – 1')] }
   ],
   apelbaum: [
     { title: 'The Last Supper', description: ['Installation of paintings in our studio for a dinner, with sound-reactive light shaders I designed.'],
