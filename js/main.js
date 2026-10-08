@@ -50,23 +50,17 @@
     });
   });
 
-  // Background artwork: scrolling blurs, warps and slowly twists the image across the whole page
+  // Background artwork: scrolling only shifts the colours (hue) of the image
   const bg = document.querySelector('.hero-bg');
   const hero = document.getElementById('home');
-  const warp = document.getElementById('warp-map');
   if (bg && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    // The SVG warp is GPU/CPU heavy: skip it on small or low-power devices (blur + twist still apply)
-    const lite = innerWidth < 768 || (navigator.hardwareConcurrency || 8) <= 4;
-    let queued = false;
+    let queued = false, lastHue = -1;
     const update = () => {
       const y = window.scrollY;
       const p = Math.min(y / innerHeight, 1);                                          // first screen
       const q = Math.min(y / Math.max(1, document.documentElement.scrollHeight - innerHeight), 1); // whole page
-      const f = [];
-      if (!lite && warp) { warp.setAttribute('scale', 200 * p + 140 * q); f.push('url(#warp)'); }
-      f.push(`blur(${p * 14}px)`, `hue-rotate(${q * 70}deg)`, `saturate(${1 + p * 0.4})`);
-      bg.style.filter = f.join(' ');
-      bg.style.transform = `translate3d(0, ${-p * 8}vh, 0) rotate(${p * 5 + q * 8}deg) scale(${1 + q * 0.1})`;
+      const hue = Math.round(q * 70);
+      if (hue !== lastHue) { bg.style.filter = `hue-rotate(${hue}deg)`; lastHue = hue; } // only repaint when it changes
       hero.style.opacity = Math.max(0, 1 - p * 1.6);
       queued = false;
     };

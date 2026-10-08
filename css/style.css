@@ -19,7 +19,7 @@ a { color:inherit; }
 
 /* Hero */
 /* The background lives on a fixed layer; main.js blurs and shifts it while scrolling */
-.hero-bg { position:fixed; inset:-20%; z-index:-1; will-change:transform,filter;
+.hero-bg { position:fixed; inset:0; z-index:-1; will-change:transform,filter;
   background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.8)), url('https://i.imgur.com/zrP02A8.jpg') center/cover no-repeat; }
 #home { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; padding-top:80px; text-align:center; }
 /* The page is transparent: the artwork stays visible behind everything, no black block */
