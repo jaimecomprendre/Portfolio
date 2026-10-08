@@ -14,9 +14,9 @@
       return el('iframe', { src: 'https://www.youtube-nocookie.com/embed/' + m.id, title: m.title || 'Video',
         loading: 'lazy', allowFullscreen: true, allow: 'accelerometer; encrypted-media; picture-in-picture' });
     }
-    const v = el('video', { controls: true, playsInline: true });
+    const v = el('video', { controls: true, playsInline: true, preload: 'metadata' });
     if (m.poster) v.poster = m.poster;
-    v.append(el('source', { src: m.src, type: 'video/mp4' }));
+    v.append(el('source', { src: m.src + '#t=0.001', type: 'video/mp4' }));
     return v;
   }
 
