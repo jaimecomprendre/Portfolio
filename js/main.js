@@ -59,7 +59,7 @@
       const y = window.scrollY;
       const p = Math.min(y / innerHeight, 1);                                          // first screen
       const q = Math.min(y / Math.max(1, document.documentElement.scrollHeight - innerHeight), 1); // whole page
-      const hue = Math.round(q * 70);
+      const hue = Math.round(q * 100);
       if (hue !== lastHue) { bg.style.filter = `hue-rotate(${hue}deg)`; lastHue = hue; } // only repaint when it changes
       hero.style.opacity = Math.max(0, 1 - p * 1.6);
       queued = false;
