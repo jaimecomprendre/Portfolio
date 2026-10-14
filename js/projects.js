@@ -32,7 +32,7 @@ const PROJECTS = {
   ],
   parallaxe: [
     { title: 'Château Perché 2026', description: ['Design, Installation and operating of the lighting kit for theGrenier Grivois Stage at the Chateau Perché 2026 festival. Worked with custom made metal lamps. and booth.'],
-      media: [img('INdM5kx', 'NDT 2022 – 1'), vid('b5t70jb', 'NDT 2022 – 1'), vid('451goRk', 'NDT 2022 – 1')] },
+      media: [img('gJ4lILy', 'NDT 2022 – 1'), img('SFYXmmN', 'NDT 2022 – 1'), vid('4jPHYHn', 'NDT 2022 – 1'), vid('b5t70jb', 'NDT 2022 – 1')] },
     { title: 'Hors-sol Warehouse', description: ['Design, Installation and operating of the lighting kit for the Hors-sol Warehouse event.'],
       media: [img('rf8wAIg', 'NDT 2022 – 1'), vid('8VDxcL6', 'NDT 2022 – 1')] },
     { title: 'P2z Cité Fertile', description: ['Design, Installation and operating of the lighting kit for the P2z Cité Fertile event.'],
